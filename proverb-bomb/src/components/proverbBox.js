@@ -1,35 +1,28 @@
 import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actionCreators } from '../state/index';
+import { useSelector } from 'react-redux';
 //
 export function ProverbBox(props) {
   const proverb = useSelector((state) => state.proverb);
   const points = props.points;
   const nextProverb = props.nextProverb;
   const addPoints = props.addPoints;
-  const startTimer = props.startTimer;
-  const resetTimer = props.resetTimer;
-  const [num, setNum] = useState(-1);
+  const setResetTimer = props.setResetTimer;
+  const num = props.num;
+  const setNum = props.setNum;
   const [value, setValue] = useState();
-  // const [add, setAdd] = useState(false);
   const handleSubmit = (num, points) => {
-    console.log(num);
     if (value === proverb[0] || proverb[0] === 'x') {
       if (proverb[0] === 'x') {
-        // startTimer();
         nextProverb(num);
       } else {
+        setResetTimer(true);
         addPoints(points);
         nextProverb(num);
-        startTimer();
-        console.log(value);
       }
     }
   };
   useEffect(() => {
     setNum(num + 1);
-    // startTimer();
   }, [proverb]);
   return (
     <>

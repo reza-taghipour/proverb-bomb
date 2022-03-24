@@ -15,18 +15,18 @@ export const nextProverb = (num) => {
     });
   };
 };
-export const startTimer = () => {
-  return (dispatch) => {
-    dispatch({
-      type: 'STARTTIMER',
-      // payload: null,
-    });
-  };
-};
 export const resetTimer = () => {
   return (dispatch) => {
     dispatch({
       type: 'RESETTIMER',
+      // payload: null,
+    });
+  };
+};
+export const startTimer = () => {
+  return (dispatch) => {
+    dispatch({
+      type: 'STARTTIMER',
       // payload: null,
     });
   };

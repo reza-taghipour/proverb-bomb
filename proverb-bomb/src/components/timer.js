@@ -1,50 +1,27 @@
-import { useTimer } from 'react-timer-hook';
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-export function Timer({ expiryTimestamp }, props) {
-  const timer = useSelector((state) => state.timer);
+import { useEffect, useState } from 'react';
+
+export function Timer(props) {
+  const nextProverb = props.nextProverb;
   const resetTimer = props.resetTimer;
-  console.log(timer);
-  const {
-    seconds,
-    minutes,
-    // hours,
-    // days,
-    isRunning,
-    start,
-    pause,
-    resume,
-    restart,
-  } = useTimer({
-    expiryTimestamp,
-    onExpire: () => console.warn('onExpire called'),
-    // resetTimer(),
-  });
+  const setResetTimer = props.setResetTimer;
+  const setDropBomb = props.setDropBomb;
+  const num = props.num;
+  const [seconds, setSeconds] = useState(10);
   useEffect(() => {
-    if (timer) {
-      const time = new Date();
-      time.setSeconds(time.getSeconds() + 10);
-      restart(time);
+    if (seconds == 0) {
+      setDropBomb(true);
+      nextProverb(num);
+      setSeconds(10);
+    } else {
+      if (resetTimer === true) {
+        setSeconds(10);
+        setResetTimer(false);
+      }
+      const interval = setInterval(() => {
+        setSeconds(seconds - 1);
+      }, 1000);
+      return () => clearInterval(interval);
     }
-  }, [timer]);
-  return (
-    <div className="items-center">
-      <div className="font-8">
-        <span>{minutes}</span>:<span>{seconds}</span>
-      </div>
-      {/* <p>{isRunning ? 'Running' : 'Not running'}</p> */}
-      {/* <button onClick={start}>Start</button>
-      <button onClick={pause}>Pause</button>
-      <button onClick={resume}>Resume</button> */}
-      <button
-        onClick={() => {
-          const time = new Date();
-          time.setSeconds(time.getSeconds() + 10);
-          restart(time);
-        }}
-      >
-        Restart
-      </button>
-    </div>
-  );
+  }, [seconds]);
+  return <div>{seconds}</div>;
 }

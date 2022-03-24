@@ -1,11 +1,11 @@
-const timerReducer = (type) => {
-  switch (type) {
+const timerReducer = (timer, action) => {
+  switch (action.type) {
     case 'STARTTIMER':
-      return true;
+      return 'start';
     case 'RESETTIMER':
-      return false;
+      return 'reset';
     default:
-      return 't';
+      return 'defualt';
   }
 };
 export default timerReducer;
