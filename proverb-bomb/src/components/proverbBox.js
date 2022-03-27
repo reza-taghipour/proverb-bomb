@@ -25,12 +25,16 @@ export function ProverbBox(props) {
     setNum(num + 1);
   }, [proverb]);
   return (
-    <>
+    <div className="flex flex-col justify-center">
       <FormatProverb proverb={proverb} setValue={setValue} />
-      <button type="submit" onClick={() => handleSubmit(num, points)}>
+      <button
+        className={proverb[0] === 'x' ? 'hidden' : 'mt-8'}
+        type="submit"
+        onClick={() => handleSubmit(num, points)}
+      >
         submit
       </button>
-    </>
+    </div>
   );
 }
 const FormatProverb = (props) => {
@@ -56,7 +60,7 @@ const FormatProverb = (props) => {
     finalSentence.push(splited[i]);
   }
   return (
-    <div className="flex w-full">
+    <div className="flex flex-wrap justify-center">
       {finalSentence.map((word, index) => {
         return (
           <div key={index} className="flex m-1 items-center">

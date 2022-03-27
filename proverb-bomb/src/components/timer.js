@@ -1,17 +1,22 @@
 import { useEffect, useState } from 'react';
-
 export function Timer(props) {
-  const nextProverb = props.nextProverb;
   const resetTimer = props.resetTimer;
   const setResetTimer = props.setResetTimer;
   const setDropBomb = props.setDropBomb;
-  const num = props.num;
-  const [seconds, setSeconds] = useState(10);
+  const seconds = props.seconds;
+  const setSeconds = props.setSeconds;
+  const func = async () => {
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        setSeconds(10);
+        resolve();
+      }, 3000);
+    });
+  }
   useEffect(() => {
     if (seconds == 0) {
       setDropBomb(true);
-      nextProverb(num);
-      setSeconds(10);
+      func();
     } else {
       if (resetTimer === true) {
         setSeconds(10);

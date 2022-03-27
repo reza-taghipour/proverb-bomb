@@ -4,7 +4,7 @@ const proverbReducer = (num, action) => {
     case 'NEXTPROVERB':
       return proverbList[action.payload];
     default:
-      return ['x', 'please tap submint to start game !'];
+      return ['x', 'please wait to start game !'];
   }
 };
 export default proverbReducer;
